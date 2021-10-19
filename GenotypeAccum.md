@@ -1,3 +1,6 @@
+Genotype accumulation curve
+===========================
+
 1．Loading packages
 -------------------
 
@@ -11,16 +14,16 @@ library(poppr)
 library(RColorBrewer)
 ```
 
-2．Defining SE function
------------------------
+2．SE function
+--------------
 
 ``` r
 # Defining SE function
 std_mean <- function(x) sd(x)/sqrt(length(x))
 ```
 
-3．Preparing data set
----------------------
+3．Loading data set
+-------------------
 
 ``` r
 # Loading data set
@@ -46,8 +49,8 @@ Nameko.SSR.clone.genind <- df2genind(Nameko.SSR.clone.table[,-c(1:4)],ploidy=2,n
 Nameko.SSR.genclone <- as.genclone(Nameko.SSR.genind)
 ```
 
-4．Genotype accumulation curve
-------------------------------
+4．plotting Genotype accumulation curve
+---------------------------------------
 
 ``` r
 # genotype accumulate curve
