@@ -2,5 +2,5 @@
 
 ## Contents
 ###
-* Multi-locus genotypes of 80 samples: data/MLG_Pmicro_80samples.csv
-* R code for PCO analysis: PCO_Phmi.Rmd
+* [MLG_Pmicro_80samples.csv](https://github.com/akihirao/nameko_SSR/data/MLG_Pmicro_80samples.csv): Multi-locus genotypes of 80 samples analyzed
+* [PCO_Phmi.Rmd](https://github.com/akihirao/nameko_SSR/PCR_Phmi.Rmd): R code for PCO analysis
