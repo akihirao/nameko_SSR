@@ -1,18 +1,7 @@
----
-title: "PCR_Phmi"
-author: "Akira Hirao"
-date: "`r Sys.Date()`"
-output: 
-  md_document:
-    toc: true
-    variant: markdown_github
-  html_document:
-    toc: true
----
+1．Loading packages
+===================
 
-# 1．Loading packages
-
-```{r message = FALSE, warning = FALSE, echo = TRUE}
+``` r
 # Loading packages
 library(polysat)
 library(hierfstat)
@@ -21,10 +10,10 @@ library(adegenet)
 library(RColorBrewer)
 ```
 
+2．Loading data set
+===================
 
-# 2．Loading data set
-
-```{r message = FALSE, warning = FALSE, echo = TRUE}
+``` r
 Nameko.SSR.table <- read.table("Phmi_genotypes_CVs.3digits.dat", header=TRUE)
 Nameko.SSR.genind <- df2genind(Nameko.SSR.table[,-c(1:3)],ploidy=2,ncode=3,ind.name=Nameko.SSR.table$Sample,pop=Nameko.SSR.table$Pop)
 
@@ -36,11 +25,12 @@ no.wild.pop <- length(unique(Nameko.SSR.genind@pop)) -1
 pinfreps <- c(3,2,3,2,2,2,2,3,3,3,2,2,3,2)
 ```
 
-# 3．Executing PCA
+3．Executing PCA
+================
 
-```{r message = FALSE, warning = FALSE, echo = TRUE}
+``` r
 pca.Nameko <- dudi.pca(Nameko.SSR.genind, 
-	scale=FALSE, scannf=FALSE, nf=3)
+    scale=FALSE, scannf=FALSE, nf=3)
 pca.Nameko.contribute <- numeric(3)
 pca.Nameko.contribute[1] <- pca.Nameko$eig[1]/sum(pca.Nameko$eig)
 pca.Nameko.contribute[2] <- pca.Nameko$eig[2]/sum(pca.Nameko$eig)
@@ -49,9 +39,13 @@ names(pca.Nameko.contribute) <- c("ContributionRate1","ContributionRate2", "Cont
 print(pca.Nameko.contribute)
 ```
 
-# 4．Plotting PCA
+    ## ContributionRate1 ContributionRate2 ContributionRate3 
+    ##        0.10212823        0.09258563        0.07574115
 
-```{r message = FALSE, warning = FALSE, echo = TRUE}
+4．Plotting PCA
+===============
+
+``` r
 col.wild =funky(no.wild.pop)
 col.wild.cultivar <- c(col.wild,"black")
 
@@ -61,9 +55,11 @@ cols <- c(cols1, cols2)
 cols.plot <- cols[1:no.pop]
 
 s.class(pca.Nameko$li,pop(Nameko.SSR.genind),
-	xax=1, yax=2,
-	col=transp(col.wild.cultivar,0.6),
-	axesell=FALSE,
-	#cstar=0,
-	cpoint=3, grid=FALSE)
+    xax=1, yax=2,
+    col=transp(col.wild.cultivar,0.6),
+    axesell=FALSE,
+    #cstar=0,
+    cpoint=3, grid=FALSE)
 ```
+
+![](PCO_Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
