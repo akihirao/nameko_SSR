@@ -57,7 +57,7 @@ Nameko.SSR.clone.genind <- df2genind(Nameko.SSR.clone.table[,-c(1:4)],ploidy=2,n
 Nameko.SSR.genclone <- as.genclone(Nameko.SSR.genind)
 ```
 
-## 4．plotting Genotype accumulation curve
+## 4．Plotting Genotype accumulation curve
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 # genotype accumulate curve
