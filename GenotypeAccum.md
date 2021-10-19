@@ -58,12 +58,14 @@ gac <- genotype_curve(Nameko.SSR.genclone, sample = 1000, quiet = TRUE)
 
 ``` r
 poppr.out <- poppr(Nameko.SSR.genclone)
-
-#MX.wild <- popsub(Nameko.SSR.genclone, "Wild")
-#ia.wild.out <- ia(MX.wild, sample = 999)
-#clonecorrect.MX.wild.out <- MX.wild %>% clonecorrect %>% ia(sample=999)
-#ia.MLG.out <- ia(Nameko.SSR.genclone, sample = 999)
+print(poppr.out)
 ```
 
-\#Reference
-\#<a href="https://grunwaldlab.github.io/Population_Genetics_in_R/Linkage_disequilibrium.html" class="uri">https://grunwaldlab.github.io/Population_Genetics_in_R/Linkage_disequilibrium.html</a>
+    ##        Pop  N MLG eMLG SE    H  G lambda E.5  Hexp    Ia  rbarD
+    ## 1     Wild 50  50   10  0 3.91 50  0.980   1 0.570 0.119 0.0093
+    ## 2 Cultivar  6   6    6  0 1.79  6  0.833   1 0.152 0.181 0.0466
+    ## 3    Total 56  56   10  0 4.03 56  0.982   1 0.546 0.329 0.0257
+    ##                  File
+    ## 1 Nameko.SSR.genclone
+    ## 2 Nameko.SSR.genclone
+    ## 3 Nameko.SSR.genclone
