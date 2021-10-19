@@ -10,7 +10,7 @@ output:
     toc: true
 ---
 
-# 1．Loading packages
+## 1．Loading packages
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 # Loading packages
@@ -22,7 +22,7 @@ library(RColorBrewer)
 ```
 
 
-# 2．Loading data set
+## 2．Loading data set
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 #allele sizes at Phmi01 and Phmi02 were 100 plus the original because less than 100 sizes could be incorrectly inputted
@@ -37,7 +37,7 @@ no.wild.pop <- length(unique(Nameko.SSR.genind@pop)) -1
 pinfreps <- c(3,2,3,2,2,2,2,3,3,3,2,2,3,2)
 ```
 
-# 3．Executing PCA
+## 3．Executing PCA
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 pca.Nameko <- dudi.pca(Nameko.SSR.genind, 
@@ -50,7 +50,7 @@ names(pca.Nameko.contribute) <- c("ContributionRate1","ContributionRate2", "Cont
 print(pca.Nameko.contribute)
 ```
 
-# 4．Plotting PCA
+## 4．Plotting PCA
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 col.wild =funky(no.wild.pop)

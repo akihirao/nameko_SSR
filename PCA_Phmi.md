@@ -1,5 +1,5 @@
 1．Loading packages
-===================
+-------------------
 
 ``` r
 # Loading packages
@@ -11,7 +11,7 @@ library(RColorBrewer)
 ```
 
 2．Loading data set
-===================
+-------------------
 
 ``` r
 #allele sizes at Phmi01 and Phmi02 were 100 plus the original because less than 100 sizes could be incorrectly inputted
@@ -27,7 +27,7 @@ pinfreps <- c(3,2,3,2,2,2,2,3,3,3,2,2,3,2)
 ```
 
 3．Executing PCA
-================
+----------------
 
 ``` r
 pca.Nameko <- dudi.pca(Nameko.SSR.genind, 
@@ -44,7 +44,7 @@ print(pca.Nameko.contribute)
     ##        0.10212823        0.09258563        0.07574115
 
 4．Plotting PCA
-===============
+---------------
 
 ``` r
 col.wild =funky(no.wild.pop)
