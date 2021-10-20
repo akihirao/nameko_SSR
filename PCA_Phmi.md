@@ -1,3 +1,6 @@
+Principle component analysis (PCA)
+==================================
+
 1．Loading packages
 -------------------
 
@@ -14,7 +17,7 @@ library(RColorBrewer)
 -------------------
 
 ``` r
-#allele sizes at Phmi01 and Phmi02 were 100 plus the original because less than 100 sizes could be incorrectly inputted
+#We adjusted allele sizes at Phmi01 and Phmi02 (but not at the other loci) to plus 100 on the original sizes ("MLG_Pmicro_80samples.csv") because less than 100 sizes could be incorrectly inputted into genind object.
 Nameko.SSR.table <- read.table("Phmi_genotypes_CVs.3digits.dat", header=TRUE)
 Nameko.SSR.genind <- df2genind(Nameko.SSR.table[,-c(1:3)],ploidy=2,ncode=3,ind.name=Nameko.SSR.table$Sample,pop=Nameko.SSR.table$Pop)
 
