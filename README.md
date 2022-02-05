@@ -2,6 +2,6 @@
 
 ## Contents
 ###
-* [MLG_Pmicro_80samples.csv](MLG_Pmicro_80samples.csv): Multi-locus genotypes of 80 samples analyzed
+* [MLG_Pmicro_123samples.csv](MLG_Pmicro_123samples.csv): Multi-locus genotypes of 80 samples analyzed
 * [Genotype accumulation curve](GenotypeAccum.md)
-* [Principle component analysis (PCA)](PCA_Phmi.md)
+* [Principle component analysis (PCA) and NJ tree](PCA.NJ.Phmi.md)
