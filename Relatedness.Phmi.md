@@ -4,6 +4,8 @@
     -   [Loading the dataset](#loading-the-dataset)
     -   [Estimating pairwise
         relatedness](#estimating-pairwise-relatedness)
+    -   [Comparing Relatedness
+        Estimators](#comparing-relatedness-estimators)
     -   [Plotting pairwise relatedness](#plotting-pairwise-relatedness)
 
 # Analysing pairwise relatedness with using the R package “related”
@@ -87,14 +89,33 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  32.463   0.101  32.701 
+    ##  33.135   0.115  33.421 
     ## 
     ## Reading output files into data.frames... Done!
+
+## Comparing Relatedness Estimators
+
+``` r
+compareestimators(nameko.Genotype, 100)
+```
+
+    ##    user  system elapsed 
+    ##  27.560   1.337  29.445 
+    ## 
+    ## Reading output files into data.frames... Done!
+    ## 
+    ## Correlation Coefficients Between Observed & Expected Values:
+    ## wang     0.767808
+    ## lynchli      0.746069
+    ## lynchrd      0.748181
+    ## quellergt    0.749623
+
+![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ## Plotting pairwise relatedness
 
 ``` r
-## The Queller & Goodnight estimator (1989) of relatedness was applied to the following analyses
+## The Queller & Goodnight estimator (1989) of relatedness was chosen to applied for the following analyses
 relatedness.out <- data.frame(ind1.id=related.run.output$related$ind1.id, ind2.id=related.run.output$related$ind2.id, relatedness=related.run.output$related$quellergt)
 
 relatedness.out.wild <- subset(relatedness.out,ind1.id %in% MLG.ID.wild & ind2.id %in% MLG.ID.wild)
@@ -128,7 +149,7 @@ p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_
 p.boxplot
 ```
 
-![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ``` r
 ## permutation test
@@ -162,7 +183,7 @@ cat("P value: wild vs cultivar.extra\n")
 print(format(wild.vs.cultivar.extra.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.197"
+    ## [1] "0.184"
 
 ``` r
 cat("P value: wild vs cultivar.indoor\n")
