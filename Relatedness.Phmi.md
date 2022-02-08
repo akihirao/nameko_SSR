@@ -6,6 +6,7 @@
         relatedness](#estimating-pairwise-relatedness)
     -   [Comparing Relatedness
         Estimators](#comparing-relatedness-estimators)
+    -   [Conducting simulations](#conducting-simulations)
     -   [Plotting pairwise relatedness](#plotting-pairwise-relatedness)
 
 # Analysing pairwise relatedness with using the R package “related”
@@ -89,7 +90,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  33.135   0.115  33.421 
+    ##  33.500   0.126  34.050 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -100,17 +101,48 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  27.560   1.337  29.445 
+    ##  25.358   1.190  27.007 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.767808
-    ## lynchli      0.746069
-    ## lynchrd      0.748181
-    ## quellergt    0.749623
+    ## wang     0.763778
+    ## lynchli      0.762696
+    ## lynchrd      0.755439
+    ## quellergt    0.763319
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+## Conducting simulations
+
+``` r
+sim <- familysim(nameko.Genotype$freqs, 100)
+output <- coancestry(sim, quellergt=1)
+```
+
+    ##    user  system elapsed 
+    ##  25.459   1.460  28.248 
+    ## 
+    ## Reading output files into data.frames... Done!
+
+``` r
+simrel <- cleanuprvals(output$relatedness, 100)
+relvalues <- simrel[, 10]
+
+#label
+label1 <- rep("PO", 100)
+label2 <- rep("Full", 100)
+label3 <- rep("Half", 100)
+label4 <- rep("Unrelated", 100)
+labels <- c(label1, label2, label3, label4)
+
+Relationship <- labels
+newdata <- as.data.frame(cbind(Relationship, relvalues))
+newdata$relvalues <- as.numeric(as.character(newdata$relvalues))
+qplot(relvalues, ..density.., data=newdata, geom="density", colour=as.factor(Relationship), xlab="Relatedness Value", ylab="Density")
+```
+
+![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-5-1.png)
 
 ## Plotting pairwise relatedness
 
@@ -149,7 +181,7 @@ p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_
 p.boxplot
 ```
 
-![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ``` r
 ## permutation test
@@ -183,7 +215,7 @@ cat("P value: wild vs cultivar.extra\n")
 print(format(wild.vs.cultivar.extra.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.184"
+    ## [1] "0.189"
 
 ``` r
 cat("P value: wild vs cultivar.indoor\n")

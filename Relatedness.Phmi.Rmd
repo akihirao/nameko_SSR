@@ -96,6 +96,27 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 compareestimators(nameko.Genotype, 100)
 ```
 
+## Conducting simulations 
+
+```{r message = FALSE, warning = FALSE, echo = TRUE}
+sim <- familysim(nameko.Genotype$freqs, 100)
+output <- coancestry(sim, quellergt=1)
+simrel <- cleanuprvals(output$relatedness, 100)
+relvalues <- simrel[, 10]
+
+#label
+label1 <- rep("PO", 100)
+label2 <- rep("Full", 100)
+label3 <- rep("Half", 100)
+label4 <- rep("Unrelated", 100)
+labels <- c(label1, label2, label3, label4)
+
+Relationship <- labels
+newdata <- as.data.frame(cbind(Relationship, relvalues))
+newdata$relvalues <- as.numeric(as.character(newdata$relvalues))
+qplot(relvalues, ..density.., data=newdata, geom="density", colour=as.factor(Relationship), xlab="Relatedness Value", ylab="Density")
+```
+
 ## Plotting pairwise relatedness
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
