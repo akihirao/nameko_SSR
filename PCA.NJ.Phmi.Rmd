@@ -140,20 +140,20 @@ MyCol.ggplot[subpop.list.cultivar.indoor.ID] <- "red"
 
 # Plotting PCA: subpopulations
 pca.scores <- as.data.frame(pca.nameko.subpop$li)
-pca.scores$Population <- pop(nameko.SSR.MLG.subpop.genind)
+pca.scores$Source <- pop(nameko.SSR.MLG.subpop.genind)
 
-gg <- data.frame(Population=pca.scores$Population, Axis1=pca.scores$Axis1, Axis2=pca.scores$Axis2)
+gg <- data.frame(Source=pca.scores$Source, Axis1=pca.scores$Axis1, Axis2=pca.scores$Axis2)
 # calculate group centroid locations
-centroids <- aggregate(cbind(Axis1,Axis2)~Population,data=gg,mean)
-gg <- merge(gg,centroids,by="Population",suffixes=c("",".centroid"))
+centroids <- aggregate(cbind(Axis1,Axis2)~Source,data=gg,mean)
+gg <- merge(gg,centroids,by="Source",suffixes=c("",".centroid"))
 
 set.seed(9)
 p <- ggplot(gg)
-p <- p + geom_point(aes(x=Axis1, y=Axis2, color=Population, shape=Population))
-p <- p + geom_point(data=centroids, aes(x=Axis1, y=Axis2, color=Population), size=0.3) 
+p <- p + geom_point(aes(x=Axis1, y=Axis2, color=Source, shape=Source))
+p <- p + geom_point(data=centroids, aes(x=Axis1, y=Axis2, color=Source), size=0.3) 
 p <- p + scale_shape_manual(values=c(0,1,2,3,4,5,6,7,8,9,10,11,12,16,17,15,18))
 p <- p + scale_color_manual(values=MyCol.ggplot)
-p <- p + geom_segment(aes(x=Axis1.centroid, y=Axis2.centroid, xend=Axis1, yend=Axis2, color=Population),size=0.15)
+p <- p + geom_segment(aes(x=Axis1.centroid, y=Axis2.centroid, xend=Axis1, yend=Axis2, color=Source),size=0.15)
 p <- p + theme_bw()
 p <- p + xlab(PCA.1.contribute.lab) + ylab(PCA.2.contribute.lab)
 
@@ -178,13 +178,13 @@ no.boot <- 1000
 theTree.boot.nj.bruvo <- bruvo.boot(nameko.SSR.MLG.subpop.genind, replen = pinfreps, sample = no.boot, tree = "nj", cutoff = 50, quiet = TRUE, showtree=FALSE)
 write.tree(theTree.boot.nj.bruvo, file="Phmi.bruvo.nj.boot.tree.nwk")
 
-info <- data.frame(ID=indNames(nameko.SSR.MLG.subpop.genind),Pop=pop(nameko.SSR.MLG.subpop.genind))
+info <- data.frame(ID=indNames(nameko.SSR.MLG.subpop.genind),Source=pop(nameko.SSR.MLG.subpop.genind))
 
 #plot tree with using ggtree
 #https://4va.github.io/biodatasci/r-ggtree.html
 #https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html
 Phmi.nj.tree.ggtree.boot <- read.tree("Phmi.bruvo.nj.boot.tree.nwk")
-p.tree <- ggtree(Phmi.nj.tree.ggtree.boot) %<+% info + geom_tippoint(aes(color=Pop, shape=Pop))
+p.tree <- ggtree(Phmi.nj.tree.ggtree.boot) %<+% info + geom_tippoint(aes(color=Source, shape=Source))
 p.tree <- p.tree + scale_shape_manual(values=c(0,1,2,3,4,5,6,7,8,9,10,11,12,16,17,15,18))
 p.tree <- p.tree + scale_color_manual(values=MyCol.ggplot)
 p.tree <- p.tree + theme_tree2()
