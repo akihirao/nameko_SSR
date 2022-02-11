@@ -19,33 +19,36 @@ library(related) #Pew et al (2015) Mol Ecol Res | https://doi.org/10.1111/1755-0
 library(ggplot2)
 library(adegenet) #handling of genind object
 library(poppr) #handling of genclone object
+library(stringr)
 ```
 
 ## Loading the dataset
 
 ``` r
-nameko.raw <- read.csv("MLG_Pmicro_123samples.csv", header=T)
+#initializing
+rm(list = ls())
 
-# Convert to 6 digits format for each of the 14 loci
-nameko.6_digit.genotype.raw = data.frame(nameko.raw[,c(1:4)],
-  Phmi01 = paste(formatC(nameko.raw$Phmi01A,width=3, flag="0"),formatC(nameko.raw$Phmi01B,width=3, flag="0"),sep=""),
-  Phmi02 = paste(formatC(nameko.raw$Phmi02A,width=3, flag="0"),formatC(nameko.raw$Phmi02B,width=3, flag="0"),sep=""),
-  Phmi03 = paste(formatC(nameko.raw$Phmi03A,width=3, flag="0"),formatC(nameko.raw$Phmi03B,width=3, flag="0"),sep=""),
-  Phmi05 = paste(formatC(nameko.raw$Phmi05A,width=3, flag="0"),formatC(nameko.raw$Phmi05B,width=3, flag="0"),sep=""),
-  Phmi07 = paste(formatC(nameko.raw$Phmi07A,width=3, flag="0"),formatC(nameko.raw$Phmi07B,width=3, flag="0"),sep=""),
-  Phmi08 = paste(formatC(nameko.raw$Phmi08A,width=3, flag="0"),formatC(nameko.raw$Phmi08B,width=3, flag="0"),sep=""),
-  Phmi09 = paste(formatC(nameko.raw$Phmi09A,width=3, flag="0"),formatC(nameko.raw$Phmi09B,width=3, flag="0"),sep=""),
-  Phmi10 = paste(formatC(nameko.raw$Phmi10A,width=3, flag="0"),formatC(nameko.raw$Phmi10B,width=3, flag="0"),sep=""),
-  Phmi13 = paste(formatC(nameko.raw$Phmi13A,width=3, flag="0"),formatC(nameko.raw$Phmi13B,width=3, flag="0"),sep=""),
-  Phmi14 = paste(formatC(nameko.raw$Phmi14A,width=3, flag="0"),formatC(nameko.raw$Phmi14B,width=3, flag="0"),sep=""),
-  Phmi17 = paste(formatC(nameko.raw$Phmi17A,width=3, flag="0"),formatC(nameko.raw$Phmi17B,width=3, flag="0"),sep=""),
-  Phmi20 = paste(formatC(nameko.raw$Phmi20A,width=3, flag="0"),formatC(nameko.raw$Phmi20B,width=3, flag="0"),sep=""),
-  Phmi23 = paste(formatC(nameko.raw$Phmi23A,width=3, flag="0"),formatC(nameko.raw$Phmi23B,width=3, flag="0"),sep=""),
-  Phmi24 = paste(formatC(nameko.raw$Phmi24A,width=3, flag="0"),formatC(nameko.raw$Phmi24B,width=3, flag="0"),sep="")
-)
+# Loading data set
+nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
 
-# Filter out No.122 due to "NA" alleles
-nameko.6_digit.genotype <- nameko.6_digit.genotype.raw[-122,]
+# define locus name
+locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
+no.locus <- length(locus.names)
+
+# Convert to 6-digit-numeric coded-genotype
+nameko.6_digit.genotype.raw = data.frame()
+nameko.6_digit.genotype.raw = data.frame(nameko.raw[,c(1:4)])
+for (i in 1:no.locus){
+  allele.A.position = 3 + i*2
+  allele.B.position = 4 + i*2
+  target.loci = locus.names[i]
+  nameko.6_digit.genotype.raw = data.frame(nameko.6_digit.genotype.raw, target.loci = paste(formatC(nameko.raw[,allele.A.position],width=3, flag="0"),formatC(nameko.raw[,allele.B.position],width=3, flag="0"),sep=""))
+}
+colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
+
+
+#filtering out the sample "K23" because of missing alleles as expressed "NA"
+nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind object
 nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
@@ -90,7 +93,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  33.500   0.126  34.050 
+    ##  32.396   0.078  32.582 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -101,15 +104,15 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  25.358   1.190  27.007 
+    ##  25.596   1.134  27.154 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.763778
-    ## lynchli      0.762696
-    ## lynchrd      0.755439
-    ## quellergt    0.763319
+    ## wang     0.759629
+    ## lynchli      0.742251
+    ## lynchrd      0.754227
+    ## quellergt    0.741384
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -121,7 +124,7 @@ output <- coancestry(sim, quellergt=1)
 ```
 
     ##    user  system elapsed 
-    ##  25.459   1.460  28.248 
+    ##  27.087   1.351  30.099 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -215,7 +218,7 @@ cat("P value: wild vs cultivar.extra\n")
 print(format(wild.vs.cultivar.extra.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.189"
+    ## [1] "0.201"
 
 ``` r
 cat("P value: wild vs cultivar.indoor\n")
