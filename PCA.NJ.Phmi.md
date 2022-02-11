@@ -20,6 +20,9 @@ library(RColorBrewer)
 ## Loading dataset
 
 ``` r
+#initializing
+rm(list = ls())
+
 # Loading data set
 nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
 
@@ -90,27 +93,6 @@ no.subpop <- length(subpop.list)
 subpop.vec <- pop(nameko.SSR.MLG.subpop.genind)
 no.clone <- length(subpop.vec)
 
-MyCol <- funky(no.subpop)
-MyCol.pallete <- funky(no.subpop)
-MyCol.indiv <- rep("grey", no.clone)
-
-Cultivar.ID <- which(levels(nameko.SSR.MLG.subpop.genind@pop)=="Indoor")
-MyCol[Cultivar.ID] <- "black"
-LogCultivar.ID <- which(levels(nameko.SSR.MLG.subpop.genind@pop)=="Outdoor")
-MyCol[LogCultivar.ID] <- "grey"
-
-#pch label
-MyPch <- numeric(no.clone)
-for(i in 1:no.subpop){
-    no.ID.target <- which(subpop.vec==subpop.list[i])
-    if(length(no.ID.target) >= 1){
-        MyPch[no.ID.target] <- i
-        MyCol.indiv[no.ID.target] <- MyCol.pallete[i]
-    }else{
-    }
-}
-Indoor.ID <- which(subpop.vec=="Indoor")
-MyPch[Indoor.ID] <- 0
 
 #Color pallet of ggplot default
 ggColorHue <- function(n, l=65) {
