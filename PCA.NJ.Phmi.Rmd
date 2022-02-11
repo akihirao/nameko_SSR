@@ -33,28 +33,26 @@ library(RColorBrewer)
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 # Loading data set
-nameko.raw <- read_csv("MLG_Pmicro_123samples.csv")
+nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
 
-# Comvert to genotype as expressed in 6-digit-numeric code
-nameko.6_digit.genotype.raw = tibble::tibble(nameko.raw[,c(1:4)],
-  Phmi01 = str_c(formatC(nameko.raw$Phmi01A,width=3, flag="0"),formatC(nameko.raw$Phmi01B,width=3, flag="0")),
-  Phmi02 = str_c(formatC(nameko.raw$Phmi02A,width=3, flag="0"),formatC(nameko.raw$Phmi02B,width=3, flag="0")),
-  Phmi03 = str_c(formatC(nameko.raw$Phmi03A,width=3, flag="0"),formatC(nameko.raw$Phmi03B,width=3, flag="0")),
-  Phmi05 = str_c(formatC(nameko.raw$Phmi05A,width=3, flag="0"),formatC(nameko.raw$Phmi05B,width=3, flag="0")),
-  Phmi07 = str_c(formatC(nameko.raw$Phmi07A,width=3, flag="0"),formatC(nameko.raw$Phmi07B,width=3, flag="0")),
-  Phmi08 = str_c(formatC(nameko.raw$Phmi08A,width=3, flag="0"),formatC(nameko.raw$Phmi08B,width=3, flag="0")),
-  Phmi09 = str_c(formatC(nameko.raw$Phmi09A,width=3, flag="0"),formatC(nameko.raw$Phmi09B,width=3, flag="0")),
-  Phmi10 = str_c(formatC(nameko.raw$Phmi10A,width=3, flag="0"),formatC(nameko.raw$Phmi10B,width=3, flag="0")),
-  Phmi13 = str_c(formatC(nameko.raw$Phmi13A,width=3, flag="0"),formatC(nameko.raw$Phmi13B,width=3, flag="0")),
-  Phmi14 = str_c(formatC(nameko.raw$Phmi14A,width=3, flag="0"),formatC(nameko.raw$Phmi14B,width=3, flag="0")),
-  Phmi17 = str_c(formatC(nameko.raw$Phmi17A,width=3, flag="0"),formatC(nameko.raw$Phmi17B,width=3, flag="0")),
-  Phmi20 = str_c(formatC(nameko.raw$Phmi20A,width=3, flag="0"),formatC(nameko.raw$Phmi20B,width=3, flag="0")),
-  Phmi23 = str_c(formatC(nameko.raw$Phmi23A,width=3, flag="0"),formatC(nameko.raw$Phmi23B,width=3, flag="0")),
-  Phmi24 = str_c(formatC(nameko.raw$Phmi24A,width=3, flag="0"),formatC(nameko.raw$Phmi24B,width=3, flag="0"))
-)
+# define locus name
+locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
+no.locus <- length(locus.names)
 
-#filtering out the sample "K23" because of missing alleles
-nameko.6_digit.genotype  <- nameko.6_digit.genotype.raw[-122,] 
+# Convert to 6-digit-numeric coded-genotype
+nameko.6_digit.genotype.raw = data.frame()
+nameko.6_digit.genotype.raw = data.frame(nameko.raw[,c(1:4)])
+for (i in 1:no.locus){
+  allele.A.position = 3 + i*2
+  allele.B.position = 4 + i*2
+  target.loci = locus.names[i]
+  nameko.6_digit.genotype.raw = data.frame(nameko.6_digit.genotype.raw, target.loci = paste(formatC(nameko.raw[,allele.A.position],width=3, flag="0"),formatC(nameko.raw[,allele.B.position],width=3, flag="0"),sep=""))
+}
+colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
+
+
+#filtering out the sample "K23" because of missing alleles as expressed "NA"
+nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind
 nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
