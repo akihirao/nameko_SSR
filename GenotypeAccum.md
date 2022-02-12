@@ -12,13 +12,6 @@ library(poppr)
 library(RColorBrewer)
 ```
 
-## SE function
-
-``` r
-# Defining SE function
-std_mean <- function(x) sd(x)/sqrt(length(x))
-```
-
 ## Loading data set
 
 ``` r
@@ -73,8 +66,9 @@ nameko.SSR.MLG.subpop.genind <- clonecorrect(nameko.SSR.subpop.genind)
 gac <- genotype_curve(nameko.SSR.genclone, sample = 1000, quiet = TRUE)
 ```
 
-![](GenotypeAccum_files/figure-markdown_github/unnamed-chunk-4-1.png) ##
-Validation of number of multilocus genotypes
+![](GenotypeAccum_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+## Validation of number of multilocus genotypes
 
 ``` r
 # Defining multilocus genotypes by genetic distance
@@ -92,19 +86,6 @@ print(no.mlg.poppr)
     ## [1] 73
 
 ## Genetic diversity
-
-``` r
-poppr(nameko.SSR.genclone)
-```
-
-    ##        Pop   N MLG eMLG   SE    H    G lambda   E.5  Hexp   Ia  rbarD
-    ## 1     Wild  72  60 43.3 1.58 3.99 46.3  0.978 0.851 0.566 0.30 0.0234
-    ## 2 Cultivar  50  13 13.0 0.00 2.08  5.9  0.830 0.700 0.251 5.10 0.4955
-    ## 3    Total 122  73 35.3 2.53 3.89 27.8  0.964 0.561 0.474 1.77 0.1379
-    ##                  File
-    ## 1 nameko.SSR.genclone
-    ## 2 nameko.SSR.genclone
-    ## 3 nameko.SSR.genclone
 
 ``` r
 poppr(nameko.SSR.subpop.genclone)

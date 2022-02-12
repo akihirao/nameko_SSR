@@ -24,13 +24,6 @@ library(poppr)
 library(RColorBrewer)
 ```
 
-## SE function
-
-```{r message = FALSE, warning = FALSE, echo = TRUE}
-# Defining SE function
-std_mean <- function(x) sd(x)/sqrt(length(x))
-```
-
 ## Loading data set
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
@@ -84,6 +77,7 @@ nameko.SSR.MLG.subpop.genind <- clonecorrect(nameko.SSR.subpop.genind)
 # genotype accumulate curve
 gac <- genotype_curve(nameko.SSR.genclone, sample = 1000, quiet = TRUE)
 ```
+
 ## Validation of number of multilocus genotypes
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
@@ -95,10 +89,6 @@ print(no.mlg.poppr)
 ```
 
 ## Genetic diversity
-
-```{r message = FALSE, warning = FALSE, echo = TRUE}
-poppr(nameko.SSR.genclone)
-```
 
 ```{r message = FALSE, warning = FALSE, echo = TRUE}
 poppr(nameko.SSR.subpop.genclone)
