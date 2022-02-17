@@ -4,10 +4,11 @@
 
 ``` r
 # Loading packages
-library(tidyverse)
+library(stringr)
 library(hierfstat)
 library(adegenet)
 library(poppr)
+library(strataG) #for performing M-ratio
 ```
 
 ## Loading data set
