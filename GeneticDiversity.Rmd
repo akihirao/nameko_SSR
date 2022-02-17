@@ -75,7 +75,7 @@ subpop.MLG.list <- nameko.SSR.MLG.subpop.genind@pop
 MLG.ID.cultivar.sawdust <- which(subpop.MLG.list %in% "Cultivar.sawdust")
 three.categories.MLG.list <- as.character(nameko.SSR.MLG.genind@pop)
 three.categories.MLG.list[MLG.ID.cultivar.sawdust] <- "Cultivar.sawdust"
-three.categories.MLG.list[three.categories.MLG.list=="Cultivar"] <- "Cultivar.log"
+three.categories.MLG.list[three.categories.MLG.list=="Cultivar"] <- "Cultivar.others"
 three.categories.factor.list <- sort(unique(three.categories.MLG.list))
 three.categories.MLG.list <- factor(three.categories.MLG.list,levels=three.categories.factor.list)
 nameko.SSR.MLG.three.categories.genind@pop <- three.categories.MLG.list
@@ -100,21 +100,21 @@ summary.out <- summary(nameko.SSR.MLG.three.categories.genind)
 A.out <- allele.count(nameko.SSR.MLG.three.categories.genind)
 A.overall <- nAll(nameko.SSR.MLG.overall.genind,onlyObserved = TRUE)
 A.cultivar.sawdust <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.sawdust"],onlyObserved = TRUE)
-A.cultivar.log <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.log"],onlyObserved = TRUE)
+A.cultivar.others <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.others"],onlyObserved = TRUE)
 A.wild <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Wild"],onlyObserved = TRUE)
 
 # Percentage of polymophic loci
 P.overall <- sum(A.overall > 1)/length(A.overall)
 P.cultivar.sawdust <- sum(A.cultivar.sawdust > 1)/length(A.cultivar.sawdust)
-P.cultivar.log <- sum(A.cultivar.log > 1)/length(A.cultivar.log)
+P.cultivar.others <- sum(A.cultivar.others > 1)/length(A.cultivar.others)
 P.wild <- sum(A.wild > 1)/length(A.wild)
 
 cat("P: cultivar.sawdust\n")
 print(P.cultivar.sawdust)
 cat("\n")
 
-cat("P: cultivar.log\n")
-print(P.cultivar.log)
+cat("P: cultivar.others\n")
+print(P.cultivar.others)
 cat("\n")
 
 cat("P: wild\n")
@@ -130,9 +130,9 @@ print(mean(A.cultivar.sawdust))
 print(std_mean(A.cultivar.sawdust))
 cat("\n")
 
-cat("Number of alleles: cultivar.\n")
-print(mean(A.cultivar.log))
-print(std_mean(A.cultivar.log))
+cat("Number of alleles: cultivar.others\n")
+print(mean(A.cultivar.others))
+print(std_mean(A.cultivar.others))
 cat("\n")
 
 cat("Number of alleles: wild\n")

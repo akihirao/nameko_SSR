@@ -65,18 +65,18 @@ nameko.genotype.MLG <- data.frame(ID=rownames(nameko.genotype.MLG),nameko.genoty
 
 MLG.ID.No.wild <- which(nameko.SSR.MLG.genind@strata$Pop=="Wild")
 MLG.ID.No.cultivar <- which(nameko.SSR.MLG.genind@strata$Pop=="Cultivar")
-MLG.ID.No.cultivar.indoor <- which(nameko.SSR.MLG.genind@strata$Subpop=="Cultivar.indoor")
-MLG.ID.No.cultivar.extra <- setdiff(MLG.ID.No.cultivar, MLG.ID.No.cultivar.indoor)
+MLG.ID.No.cultivar.sawdust <- which(nameko.SSR.MLG.genind@strata$Subpop=="Cultivar.sawdust")
+MLG.ID.No.cultivar.others <- setdiff(MLG.ID.No.cultivar, MLG.ID.No.cultivar.sawdust)
 
 nameko.genotype.MLG.wild <- nameko.genotype.MLG[MLG.ID.No.wild,]
 nameko.genotype.MLG.cultivar <- nameko.genotype.MLG[MLG.ID.No.cultivar,]
-nameko.genotype.MLG.cultivar.indoor <- nameko.genotype.MLG[MLG.ID.No.cultivar.indoor,]
-nameko.genotype.MLG.cultivar.extra <- nameko.genotype.MLG[MLG.ID.No.cultivar.extra,]
+nameko.genotype.MLG.cultivar.sawdust <- nameko.genotype.MLG[MLG.ID.No.cultivar.sawdust,]
+nameko.genotype.MLG.cultivar.others <- nameko.genotype.MLG[MLG.ID.No.cultivar.others,]
 
 MLG.ID.wild <- nameko.genotype.MLG.wild$ID
 MLG.ID.cultivar <- nameko.genotype.MLG.cultivar$ID
-MLG.ID.cultivar.indoor <- nameko.genotype.MLG.cultivar.indoor$ID
-MLG.ID.cultivar.extra <- setdiff(MLG.ID.cultivar, MLG.ID.cultivar.indoor)
+MLG.ID.cultivar.sawdust <- nameko.genotype.MLG.cultivar.sawdust$ID
+MLG.ID.cultivar.others <- setdiff(MLG.ID.cultivar, MLG.ID.cultivar.sawdust)
 
 # write out text file to apply the pakacates "related"
 write.table(nameko.genotype.MLG, "nameko.MLG.txt", quote=F,row.names=F,col.names=F, append=F)
@@ -93,7 +93,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  32.396   0.078  32.582 
+    ##  32.868   0.079  33.175 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -104,15 +104,15 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  25.596   1.134  27.154 
+    ##  27.296   1.361  29.656 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.759629
-    ## lynchli      0.742251
-    ## lynchrd      0.754227
-    ## quellergt    0.741384
+    ## wang     0.773182
+    ## lynchli      0.761609
+    ## lynchrd      0.757125
+    ## quellergt    0.766975
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -124,7 +124,7 @@ output <- coancestry(sim, quellergt=1)
 ```
 
     ##    user  system elapsed 
-    ##  27.087   1.351  30.099 
+    ##  30.321   1.868  35.254 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -161,24 +161,89 @@ relatedness.out.cultivar <- subset(relatedness.out,ind1.id %in% MLG.ID.cultivar 
 no.cultivar.pair <- nrow(relatedness.out.cultivar)
 relatedness.out.cultivar <- data.frame(relatedness.out.cultivar, Within=rep("Cultivar",no.cultivar.pair))
 
-relatedness.out.cultivar.indoor <- subset(relatedness.out,ind1.id %in% MLG.ID.cultivar.indoor & ind2.id %in% MLG.ID.cultivar.indoor)
-no.cultivar.indoor.pair <- nrow(relatedness.out.cultivar.indoor)
-relatedness.out.cultivar.indoor <- data.frame(relatedness.out.cultivar.indoor, Within=rep("Cultivar.indoor",no.cultivar.indoor.pair))
+relatedness.out.cultivar.sawdust <- subset(relatedness.out,ind1.id %in% MLG.ID.cultivar.sawdust & ind2.id %in% MLG.ID.cultivar.sawdust)
+no.cultivar.sawdust.pair <- nrow(relatedness.out.cultivar.sawdust)
+relatedness.out.cultivar.sawdust <- data.frame(relatedness.out.cultivar.sawdust, Within=rep("Cultivar.sawdust",no.cultivar.sawdust.pair))
 
-relatedness.out.cultivar.extra <- subset(relatedness.out,ind1.id %in% MLG.ID.cultivar.extra & ind2.id %in% MLG.ID.cultivar.extra)
-no.cultivar.extra.pair <- nrow(relatedness.out.cultivar.extra)
+relatedness.out.cultivar.others <- subset(relatedness.out,ind1.id %in% MLG.ID.cultivar.others & ind2.id %in% MLG.ID.cultivar.others)
+no.cultivar.others.pair <- nrow(relatedness.out.cultivar.others)
 
-relatedness.out.cultivar.extra <- data.frame(relatedness.out.cultivar.extra, Within=rep("Cultivar.extra",no.cultivar.extra.pair))
+relatedness.out.cultivar.others <- data.frame(relatedness.out.cultivar.others, Within=rep("Cultivar.others",no.cultivar.others.pair))
 
-relatedness.out.within <- rbind(relatedness.out.wild,relatedness.out.cultivar.extra,relatedness.out.cultivar.indoor)
+relatedness.out.within <- rbind(relatedness.out.wild,relatedness.out.cultivar.sawdust,relatedness.out.cultivar.others)
 
-relatedness.out.within.wild.vs.cultivar.extra <- rbind(relatedness.out.wild,relatedness.out.cultivar.extra)
+relatedness.out.within.wild.vs.cultivar.others <- rbind(relatedness.out.wild,relatedness.out.cultivar.others)
 
-relatedness.out.within.wild.vs.cultivar.indoor <- rbind(relatedness.out.wild,relatedness.out.cultivar.indoor)
-relatedness.out.within.cultivar.extra.vs.cultivar.indoor <- rbind(relatedness.out.cultivar.extra,relatedness.out.cultivar.indoor)
+relatedness.out.within.wild.vs.cultivar.sawdust <- rbind(relatedness.out.wild,relatedness.out.cultivar.sawdust)
+relatedness.out.within.cultivar.others.vs.cultivar.sawdust <- rbind(relatedness.out.cultivar.others,relatedness.out.cultivar.sawdust)
 
+cat("relatedness within wild: mean, SD\n")
+```
 
+    ## relatedness within wild: mean, SD
 
+``` r
+print(mean(relatedness.out.wild$relatedness))
+```
+
+    ## [1] -0.04068503
+
+``` r
+print(sd(relatedness.out.wild$relatedness))
+```
+
+    ## [1] 0.1895804
+
+``` r
+cat("relatedness within cultivar.sawdust: mean, SD\n")
+```
+
+    ## relatedness within cultivar.sawdust: mean, SD
+
+``` r
+print(mean(relatedness.out.cultivar.sawdust$relatedness))
+```
+
+    ## [1] 0.7988607
+
+``` r
+print(sd(relatedness.out.cultivar.sawdust$relatedness))
+```
+
+    ## [1] 0.1117075
+
+``` r
+cat("relatedness within cultivar.others: mean, SD\n")
+```
+
+    ## relatedness within cultivar.others: mean, SD
+
+``` r
+print(mean(relatedness.out.cultivar.others$relatedness))
+```
+
+    ## [1] 0.03857
+
+``` r
+print(sd(relatedness.out.cultivar.others$relatedness))
+```
+
+    ## [1] 0.3681985
+
+``` r
+relatedness.out.N127.N2 <- subset(relatedness.out,ind1.id %in% "Tohoku-N127" & ind2.id %in% "Fukushima-N2")
+cat("relatedness between N127 and Fukushima-N2\n")
+```
+
+    ## relatedness between N127 and Fukushima-N2
+
+``` r
+print(relatedness.out.N127.N2$relatedness)
+```
+
+    ## [1] 0.124
+
+``` r
 p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")
 
 p.boxplot
@@ -199,47 +264,47 @@ permutation.test <- function(treatment, outcome, n){
   return(list(obs, result, distribution))
   }
 
-# wild vs cultivar.extra
-wild.vs.cultivar.extra.permu.out <- permutation.test(relatedness.out.within.wild.vs.cultivar.extra$Within, relatedness.out.within.wild.vs.cultivar.extra$relatedness, no.permutation)
+# wild vs cultivar.others
+wild.vs.cultivar.others.permu.out <- permutation.test(relatedness.out.within.wild.vs.cultivar.others$Within, relatedness.out.within.wild.vs.cultivar.others$relatedness, no.permutation)
 
-# wild vs cultivar.indoor
-wild.vs.cultivar.indoor.permu.out <- permutation.test(relatedness.out.within.wild.vs.cultivar.indoor$Within, relatedness.out.within.wild.vs.cultivar.indoor$relatedness, no.permutation)
+# wild vs cultivar.sawdust
+wild.vs.cultivar.sawdust.permu.out <- permutation.test(relatedness.out.within.wild.vs.cultivar.sawdust$Within, relatedness.out.within.wild.vs.cultivar.sawdust$relatedness, no.permutation)
 
-# cultivar.extra vs cultivar.indoor
-cultivar.extra.vs.cultivar.indoor.permu.out <- permutation.test(relatedness.out.within.cultivar.extra.vs.cultivar.indoor$Within, relatedness.out.within.cultivar.extra.vs.cultivar.indoor$relatedness, no.permutation)
+# cultivar.others vs cultivar.sawdust
+cultivar.others.vs.cultivar.sawdust.permu.out <- permutation.test(relatedness.out.within.cultivar.others.vs.cultivar.sawdust$Within, relatedness.out.within.cultivar.others.vs.cultivar.sawdust$relatedness, no.permutation)
 
 # print out P value
-cat("P value: wild vs cultivar.extra\n")
+cat("P value: wild vs cultivar.others\n")
 ```
 
-    ## P value: wild vs cultivar.extra
+    ## P value: wild vs cultivar.others
 
 ``` r
-print(format(wild.vs.cultivar.extra.permu.out[[2]]),digits=3)
+print(format(wild.vs.cultivar.others.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.201"
+    ## [1] "0.191"
 
 ``` r
-cat("P value: wild vs cultivar.indoor\n")
+cat("P value: wild vs cultivar.sawdust\n")
 ```
 
-    ## P value: wild vs cultivar.indoor
+    ## P value: wild vs cultivar.sawdust
 
 ``` r
-print(format(wild.vs.cultivar.indoor.permu.out[[2]]),digits=3)
+print(format(wild.vs.cultivar.sawdust.permu.out[[2]]),digits=3)
 ```
 
     ## [1] "0"
 
 ``` r
-cat("P value: cultivar.extra vs cultivar.indoor\n")
+cat("P value: cultivar.others vs cultivar.sawdust\n")
 ```
 
-    ## P value: cultivar.extra vs cultivar.indoor
+    ## P value: cultivar.others vs cultivar.sawdust
 
 ``` r
-print(format(cultivar.extra.vs.cultivar.indoor.permu.out[[2]]),digits=3)
+print(format(cultivar.others.vs.cultivar.sawdust.permu.out[[2]]),digits=3)
 ```
 
     ## [1] "0"
