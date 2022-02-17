@@ -52,7 +52,7 @@ colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
 nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind object
-nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
+nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Category)
 strata(nameko.SSR.genind) <- data.frame(nameko.6_digit.genotype[,c(2:3)])
 
 # Convert to genclone object
@@ -64,9 +64,9 @@ nameko.SSR.MLG.genind <- clonecorrect(nameko.SSR.genind)
 nameko.genotype.MLG <- genind2df(nameko.SSR.MLG.genind, usepop = FALSE, oneColPerAll = TRUE)
 nameko.genotype.MLG <- data.frame(ID=rownames(nameko.genotype.MLG),nameko.genotype.MLG)
 
-MLG.ID.No.wild <- which(nameko.SSR.MLG.genind@strata$Pop=="Wild")
-MLG.ID.No.cultivar <- which(nameko.SSR.MLG.genind@strata$Pop=="Cultivar")
-MLG.ID.No.cultivar.sawdust <- which(nameko.SSR.MLG.genind@strata$Subpop=="Cultivar.sawdust")
+MLG.ID.No.wild <- which(nameko.SSR.MLG.genind@strata$Category=="Wild")
+MLG.ID.No.cultivar <- which(nameko.SSR.MLG.genind@strata$Category=="Cultivar")
+MLG.ID.No.cultivar.sawdust <- which(nameko.SSR.MLG.genind@strata$Source=="Cultivar.sawdust.JPN")
 MLG.ID.No.cultivar.others <- setdiff(MLG.ID.No.cultivar, MLG.ID.No.cultivar.sawdust)
 
 nameko.genotype.MLG.wild <- nameko.genotype.MLG[MLG.ID.No.wild,]

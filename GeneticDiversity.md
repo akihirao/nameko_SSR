@@ -39,10 +39,10 @@ colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
 nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind
-nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
+nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Category)
 
 # Convert to genind
-nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Subpop)
+nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Source)
 
 strata(nameko.SSR.genind) <- data.frame(nameko.6_digit.genotype[,c(2:3)])
 
@@ -60,9 +60,9 @@ no.MLG.samples <- length(indNames(nameko.SSR.MLG.genind))
 
 nameko.SSR.MLG.three.categories.genind <- nameko.SSR.MLG.genind
 subpop.MLG.list <- nameko.SSR.MLG.subpop.genind@pop
-MLG.ID.cultivar.indoor <- which(subpop.MLG.list %in% "Cultivar.indoor")
+MLG.ID.cultivar.sawdust <- which(subpop.MLG.list %in% "Cultivar.sawdust.JPN")
 three.categories.MLG.list <- as.character(nameko.SSR.MLG.genind@pop)
-three.categories.MLG.list[MLG.ID.cultivar.indoor] <- "Cultivar.indoor"
+three.categories.MLG.list[MLG.ID.cultivar.sawdust] <- "Cultivar.sawdust.JPN"
 three.categories.MLG.list[three.categories.MLG.list=="Cultivar"] <- "Cultivar.others"
 three.categories.factor.list <- sort(unique(three.categories.MLG.list))
 three.categories.MLG.list <- factor(three.categories.MLG.list,levels=three.categories.factor.list)
@@ -86,23 +86,23 @@ summary.out <- summary(nameko.SSR.MLG.three.categories.genind)
 # Number of alleles
 A.out <- allele.count(nameko.SSR.MLG.three.categories.genind)
 A.overall <- nAll(nameko.SSR.MLG.overall.genind,onlyObserved = TRUE)
-A.cultivar.indoor <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.indoor"],onlyObserved = TRUE)
+A.cultivar.sawdust <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.sawdust.JPN"],onlyObserved = TRUE)
 A.cultivar.others <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.others"],onlyObserved = TRUE)
 A.wild <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Wild"],onlyObserved = TRUE)
 
 # Percentage of polymophic loci
 P.overall <- sum(A.overall > 1)/length(A.overall)
-P.cultivar.indoor <- sum(A.cultivar.indoor > 1)/length(A.cultivar.indoor)
+P.cultivar.sawdust <- sum(A.cultivar.sawdust > 1)/length(A.cultivar.sawdust)
 P.cultivar.others <- sum(A.cultivar.others > 1)/length(A.cultivar.others)
 P.wild <- sum(A.wild > 1)/length(A.wild)
 
-cat("P: cultivar.indoor\n")
+cat("P: cultivar.sawdust.JPN\n")
 ```
 
-    ## P: cultivar.indoor
+    ## P: cultivar.sawdust.JPN
 
 ``` r
-print(P.cultivar.indoor)
+print(P.cultivar.sawdust)
 ```
 
     ## [1] 0.3571429
@@ -160,19 +160,19 @@ cat("\n")
 ```
 
 ``` r
-cat("Number of alleles: cultivar.indoor\n")
+cat("Number of alleles: cultivar.sawdust.JPN\n")
 ```
 
-    ## Number of alleles: cultivar.indoor
+    ## Number of alleles: cultivar.sawdust.JPN
 
 ``` r
-print(mean(A.cultivar.indoor))
+print(mean(A.cultivar.sawdust))
 ```
 
     ## [1] 1.357143
 
 ``` r
-print(std_mean(A.cultivar.indoor))
+print(std_mean(A.cultivar.sawdust))
 ```
 
     ## [1] 0.1328944
@@ -261,8 +261,8 @@ cat("Allelic richness: mean\n")
 print(apply(AR.out$Ar,2,mean))
 ```
 
-    ## Cultivar.indoor Cultivar.others            Wild 
-    ##        1.353985        2.785714        3.322446
+    ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
+    ##             2.785714             1.353985             3.322446
 
 ``` r
 cat("Allelic richness: SE\n")
@@ -274,8 +274,8 @@ cat("Allelic richness: SE\n")
 print(apply(AR.out$Ar,2,std_mean))
 ```
 
-    ## Cultivar.indoor Cultivar.others            Wild 
-    ##       0.1317393       0.2997906       0.2687665
+    ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
+    ##            0.2997906            0.1317393            0.2687665
 
 ``` r
 cat("\n")
@@ -321,8 +321,8 @@ cat("Observed heterozygosity\n")
 print(Ho.out)
 ```
 
-    ## Cultivar.indoor Cultivar.others            Wild 
-    ##       0.1785714       0.4285714       0.3583357
+    ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
+    ##            0.4285714            0.1785714            0.3583357
 
 ``` r
 cat("Observed heterozygosity across overall\n")
@@ -352,8 +352,8 @@ cat("Expected heterozygosity\n")
 print(Hs.out)
 ```
 
-    ## Cultivar.indoor Cultivar.others            Wild 
-    ##       0.1506696       0.4714286       0.5611409
+    ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
+    ##            0.4714286            0.1506696            0.5611409
 
 ``` r
 cat("Expected heterozygosity across overall\n")

@@ -51,7 +51,7 @@ colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
 nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind object
-nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
+nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Category)
 strata(nameko.SSR.genind) <- data.frame(nameko.6_digit.genotype[,c(2:3)])
 
 # Convert to genclone object
@@ -63,9 +63,9 @@ nameko.SSR.MLG.genind <- clonecorrect(nameko.SSR.genind)
 nameko.genotype.MLG <- genind2df(nameko.SSR.MLG.genind, usepop = FALSE, oneColPerAll = TRUE)
 nameko.genotype.MLG <- data.frame(ID=rownames(nameko.genotype.MLG),nameko.genotype.MLG)
 
-MLG.ID.No.wild <- which(nameko.SSR.MLG.genind@strata$Pop=="Wild")
-MLG.ID.No.cultivar <- which(nameko.SSR.MLG.genind@strata$Pop=="Cultivar")
-MLG.ID.No.cultivar.sawdust <- which(nameko.SSR.MLG.genind@strata$Subpop=="Cultivar.sawdust")
+MLG.ID.No.wild <- which(nameko.SSR.MLG.genind@strata$Category=="Wild")
+MLG.ID.No.cultivar <- which(nameko.SSR.MLG.genind@strata$Category=="Cultivar")
+MLG.ID.No.cultivar.sawdust <- which(nameko.SSR.MLG.genind@strata$Source=="Cultivar.sawdust.JPN")
 MLG.ID.No.cultivar.others <- setdiff(MLG.ID.No.cultivar, MLG.ID.No.cultivar.sawdust)
 
 nameko.genotype.MLG.wild <- nameko.genotype.MLG[MLG.ID.No.wild,]
@@ -93,7 +93,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  32.868   0.079  33.175 
+    ##  32.282   0.083  32.615 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -104,15 +104,15 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  27.296   1.361  29.656 
+    ##  25.866   1.129  27.296 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.773182
-    ## lynchli      0.761609
-    ## lynchrd      0.757125
-    ## quellergt    0.766975
+    ## wang     0.738847
+    ## lynchli      0.736618
+    ## lynchrd      0.742628
+    ## quellergt    0.748654
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -124,7 +124,7 @@ output <- coancestry(sim, quellergt=1)
 ```
 
     ##    user  system elapsed 
-    ##  30.321   1.868  35.254 
+    ##  25.468   1.103  27.076 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -283,7 +283,7 @@ cat("P value: wild vs cultivar.others\n")
 print(format(wild.vs.cultivar.others.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.191"
+    ## [1] "0.199"
 
 ``` r
 cat("P value: wild vs cultivar.sawdust\n")

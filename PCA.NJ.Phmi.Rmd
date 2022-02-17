@@ -58,10 +58,10 @@ colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
 nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind
-nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
+nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Category)
 
 # Convert to genind
-nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Subpop)
+nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Source)
 
 strata(nameko.SSR.genind) <- data.frame(nameko.6_digit.genotype[,c(2:3)])
 
@@ -115,8 +115,8 @@ ggColorHue <- function(n, l=65) {
 
 MyCol.ggplot <- ggColorHue(no.subpop)
 MyCol.ggplot[14:17] <- c(brewer.pal(11,"Spectral")[1:4])
-subpop.list.cultivar.indoor.ID <- which(subpop.list=="Cultivar.indoor")
-MyCol.ggplot[subpop.list.cultivar.indoor.ID] <- "red"
+subpop.list.cultivar.sawdust.ID <- which(subpop.list=="Cultivar.sawdust.JPN")
+MyCol.ggplot[subpop.list.cultivar.sawdust.ID] <- "red"
 
 # Plotting PCA: subpopulations
 pca.scores <- as.data.frame(pca.nameko.subpop$li)

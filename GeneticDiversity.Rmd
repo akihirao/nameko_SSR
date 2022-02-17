@@ -51,10 +51,10 @@ colnames(nameko.6_digit.genotype.raw)[-c(1:4)] <- locus.names
 nameko.6_digit.genotype  <- na.omit(nameko.6_digit.genotype.raw)
 
 # Convert to genind
-nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Pop)
+nameko.SSR.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Category)
 
 # Convert to genind
-nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Subpop)
+nameko.SSR.subpop.genind <- df2genind(nameko.6_digit.genotype[,-c(1:4)],ploidy=2,ncode=3,ind.name=nameko.6_digit.genotype$ID,pop=nameko.6_digit.genotype$Source)
 
 strata(nameko.SSR.genind) <- data.frame(nameko.6_digit.genotype[,c(2:3)])
 
@@ -72,9 +72,9 @@ no.MLG.samples <- length(indNames(nameko.SSR.MLG.genind))
 
 nameko.SSR.MLG.three.categories.genind <- nameko.SSR.MLG.genind
 subpop.MLG.list <- nameko.SSR.MLG.subpop.genind@pop
-MLG.ID.cultivar.sawdust <- which(subpop.MLG.list %in% "Cultivar.sawdust")
+MLG.ID.cultivar.sawdust <- which(subpop.MLG.list %in% "Cultivar.sawdust.JPN")
 three.categories.MLG.list <- as.character(nameko.SSR.MLG.genind@pop)
-three.categories.MLG.list[MLG.ID.cultivar.sawdust] <- "Cultivar.sawdust"
+three.categories.MLG.list[MLG.ID.cultivar.sawdust] <- "Cultivar.sawdust.JPN"
 three.categories.MLG.list[three.categories.MLG.list=="Cultivar"] <- "Cultivar.others"
 three.categories.factor.list <- sort(unique(three.categories.MLG.list))
 three.categories.MLG.list <- factor(three.categories.MLG.list,levels=three.categories.factor.list)
@@ -99,7 +99,7 @@ summary.out <- summary(nameko.SSR.MLG.three.categories.genind)
 # Number of alleles
 A.out <- allele.count(nameko.SSR.MLG.three.categories.genind)
 A.overall <- nAll(nameko.SSR.MLG.overall.genind,onlyObserved = TRUE)
-A.cultivar.sawdust <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.sawdust"],onlyObserved = TRUE)
+A.cultivar.sawdust <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.sawdust.JPN"],onlyObserved = TRUE)
 A.cultivar.others <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Cultivar.others"],onlyObserved = TRUE)
 A.wild <- nAll(nameko.SSR.MLG.three.categories.genind[pop="Wild"],onlyObserved = TRUE)
 
@@ -109,7 +109,7 @@ P.cultivar.sawdust <- sum(A.cultivar.sawdust > 1)/length(A.cultivar.sawdust)
 P.cultivar.others <- sum(A.cultivar.others > 1)/length(A.cultivar.others)
 P.wild <- sum(A.wild > 1)/length(A.wild)
 
-cat("P: cultivar.sawdust\n")
+cat("P: cultivar.sawdust.JPN\n")
 print(P.cultivar.sawdust)
 cat("\n")
 
@@ -125,7 +125,7 @@ cat("P: overall\n")
 print(P.overall)
 cat("\n")
 
-cat("Number of alleles: cultivar.sawdust\n")
+cat("Number of alleles: cultivar.sawdust.JPN\n")
 print(mean(A.cultivar.sawdust))
 print(std_mean(A.cultivar.sawdust))
 cat("\n")
