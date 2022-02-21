@@ -29,7 +29,7 @@ library(stringr)
 rm(list = ls())
 
 # Loading data set
-nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
+nameko.raw <- read.csv("MLG_Pmicro_124samples.csv",header=T)
 
 # define locus name
 locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
@@ -93,7 +93,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  32.282   0.083  32.615 
+    ##  32.806   0.079  33.191 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -104,15 +104,15 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  25.866   1.129  27.296 
+    ##  27.239   1.449  30.037 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.738847
-    ## lynchli      0.736618
-    ## lynchrd      0.742628
-    ## quellergt    0.748654
+    ## wang     0.760138
+    ## lynchli      0.749709
+    ## lynchrd      0.765249
+    ## quellergt    0.755195
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -124,7 +124,7 @@ output <- coancestry(sim, quellergt=1)
 ```
 
     ##    user  system elapsed 
-    ##  25.468   1.103  27.076 
+    ##  29.294   2.063  34.605 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -186,13 +186,13 @@ cat("relatedness within wild: mean, SD\n")
 print(mean(relatedness.out.wild$relatedness))
 ```
 
-    ## [1] -0.04068503
+    ## [1] -0.03980995
 
 ``` r
 print(sd(relatedness.out.wild$relatedness))
 ```
 
-    ## [1] 0.1895804
+    ## [1] 0.1912324
 
 ``` r
 cat("relatedness within cultivar.sawdust: mean, SD\n")
@@ -204,13 +204,13 @@ cat("relatedness within cultivar.sawdust: mean, SD\n")
 print(mean(relatedness.out.cultivar.sawdust$relatedness))
 ```
 
-    ## [1] 0.7988607
+    ## [1] 0.798525
 
 ``` r
 print(sd(relatedness.out.cultivar.sawdust$relatedness))
 ```
 
-    ## [1] 0.1117075
+    ## [1] 0.1119346
 
 ``` r
 cat("relatedness within cultivar.others: mean, SD\n")
@@ -222,13 +222,13 @@ cat("relatedness within cultivar.others: mean, SD\n")
 print(mean(relatedness.out.cultivar.others$relatedness))
 ```
 
-    ## [1] 0.03857
+    ## [1] 0.03501
 
 ``` r
 print(sd(relatedness.out.cultivar.others$relatedness))
 ```
 
-    ## [1] 0.3681985
+    ## [1] 0.3684103
 
 ``` r
 relatedness.out.N127.N2 <- subset(relatedness.out,ind1.id %in% "Tohoku-N127" & ind2.id %in% "Fukushima-N2")
@@ -241,7 +241,7 @@ cat("relatedness between N127 and Fukushima-N2\n")
 print(relatedness.out.N127.N2$relatedness)
 ```
 
-    ## [1] 0.124
+    ## [1] 0.1232
 
 ``` r
 p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")
@@ -283,7 +283,7 @@ cat("P value: wild vs cultivar.others\n")
 print(format(wild.vs.cultivar.others.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.199"
+    ## [1] "0.22"
 
 ``` r
 cat("P value: wild vs cultivar.sawdust\n")

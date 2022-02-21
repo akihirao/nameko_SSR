@@ -19,7 +19,7 @@ library(RColorBrewer)
 rm(list = ls())
 
 # Loading data set
-nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
+nameko.raw <- read.csv("MLG_Pmicro_124samples.csv",header=T)
 
 # define locus name
 locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
@@ -83,7 +83,7 @@ cat("No. Multilocus genotypes\n")
 print(no.mlg.poppr)
 ```
 
-    ## [1] 73
+    ## [1] 74
 
 ## Genetic diversity
 
@@ -93,7 +93,7 @@ poppr(nameko.SSR.subpop.genclone)
 
     ##                            Pop   N MLG  eMLG    SE     H     G lambda   E.5
     ## 1                     Hokkaido   3   3  3.00 0.000 1.099  3.00  0.667 1.000
-    ## 2                       Aomori   6   6  6.00 0.000 1.792  6.00  0.833 1.000
+    ## 2                       Aomori   7   7  7.00 0.000 1.946  7.00  0.857 1.000
     ## 3                        Iwate   2   2  2.00 0.000 0.693  2.00  0.500 1.000
     ## 4                        Akita   2   2  2.00 0.000 0.693  2.00  0.500 1.000
     ## 5                       Miyagi   5   3  3.00 0.000 0.950  2.27  0.560 0.802
@@ -109,23 +109,23 @@ poppr(nameko.SSR.subpop.genclone)
     ## 15            Cultivar.log.JPN   8   3  3.00 0.000 0.736  1.68  0.406 0.630
     ## 16 Cultivar.sawdust.x.wild.JPN   1   1  1.00 0.000 0.000  1.00  0.000   NaN
     ## 17                Cultivar.CHN   2   2  2.00 0.000 0.693  2.00  0.500 1.000
-    ## 18                       Total 122  73  8.96 0.970 3.885 27.77  0.964 0.561
-    ##     Hexp     Ia    rbarD                       File
-    ## 1  0.476 -0.462 -0.05556 nameko.SSR.subpop.genclone
-    ## 2  0.579 -0.107 -0.00853 nameko.SSR.subpop.genclone
-    ## 3  0.238     NA       NA nameko.SSR.subpop.genclone
-    ## 4  0.488     NA       NA nameko.SSR.subpop.genclone
-    ## 5  0.368  6.205  0.77034 nameko.SSR.subpop.genclone
-    ## 6  0.553 -0.191 -0.01500 nameko.SSR.subpop.genclone
-    ## 7  0.568  0.243  0.02186 nameko.SSR.subpop.genclone
-    ## 8  0.557  1.356  0.10713 nameko.SSR.subpop.genclone
-    ## 9  0.500     NA       NA nameko.SSR.subpop.genclone
-    ## 10 0.343  7.333  1.00000 nameko.SSR.subpop.genclone
-    ## 11 0.553  1.690  0.14472 nameko.SSR.subpop.genclone
-    ## 12 0.429     NA       NA nameko.SSR.subpop.genclone
-    ## 13 0.292  6.364  1.00000 nameko.SSR.subpop.genclone
-    ## 14 0.128  0.695  0.17881 nameko.SSR.subpop.genclone
-    ## 15 0.336  8.775  0.84685 nameko.SSR.subpop.genclone
-    ## 16 0.429     NA       NA nameko.SSR.subpop.genclone
-    ## 17 0.298     NA       NA nameko.SSR.subpop.genclone
-    ## 18 0.474  1.773  0.13786 nameko.SSR.subpop.genclone
+    ## 18                       Total 123  74  8.97 0.965 3.901 28.17  0.965 0.561
+    ##     Hexp      Ia    rbarD                       File
+    ## 1  0.476 -0.4615 -0.05556 nameko.SSR.subpop.genclone
+    ## 2  0.547 -0.0626 -0.00499 nameko.SSR.subpop.genclone
+    ## 3  0.238      NA       NA nameko.SSR.subpop.genclone
+    ## 4  0.488      NA       NA nameko.SSR.subpop.genclone
+    ## 5  0.368  6.2055  0.77034 nameko.SSR.subpop.genclone
+    ## 6  0.553 -0.1906 -0.01500 nameko.SSR.subpop.genclone
+    ## 7  0.568  0.2434  0.02186 nameko.SSR.subpop.genclone
+    ## 8  0.557  1.3561  0.10713 nameko.SSR.subpop.genclone
+    ## 9  0.500      NA       NA nameko.SSR.subpop.genclone
+    ## 10 0.343  7.3333  1.00000 nameko.SSR.subpop.genclone
+    ## 11 0.553  1.6905  0.14472 nameko.SSR.subpop.genclone
+    ## 12 0.429      NA       NA nameko.SSR.subpop.genclone
+    ## 13 0.292  6.3636  1.00000 nameko.SSR.subpop.genclone
+    ## 14 0.128  0.6951  0.17881 nameko.SSR.subpop.genclone
+    ## 15 0.336  8.7753  0.84685 nameko.SSR.subpop.genclone
+    ## 16 0.429      NA       NA nameko.SSR.subpop.genclone
+    ## 17 0.298      NA       NA nameko.SSR.subpop.genclone
+    ## 18 0.473  1.7411  0.13540 nameko.SSR.subpop.genclone

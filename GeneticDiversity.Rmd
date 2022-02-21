@@ -30,7 +30,7 @@ library(strataG) #for performing M-ratio
 rm(list = ls())
 
 # Loading data set
-nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
+nameko.raw <- read.csv("MLG_Pmicro_124samples.csv",header=T)
 
 # define locus name
 locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
