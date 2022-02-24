@@ -18,7 +18,7 @@ library(strataG) #for performing M-ratio
 rm(list = ls())
 
 # Loading data set
-nameko.raw <- read.csv("MLG_Pmicro_123samples.csv",header=T)
+nameko.raw <- read.csv("MLG_Pmicro_124samples.csv",header=T)
 
 # define locus name
 locus.names <- unique(str_sub(colnames(nameko.raw)[-c(1:4)],end=-2))
@@ -262,7 +262,7 @@ print(apply(AR.out$Ar,2,mean))
 ```
 
     ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
-    ##             2.785714             1.353985             3.322446
+    ##             2.785714             1.353985             3.306453
 
 ``` r
 cat("Allelic richness: SE\n")
@@ -275,7 +275,7 @@ print(apply(AR.out$Ar,2,std_mean))
 ```
 
     ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
-    ##            0.2997906            0.1317393            0.2687665
+    ##            0.2997906            0.1317393            0.2672627
 
 ``` r
 cat("\n")
@@ -291,7 +291,7 @@ cat("Allelic richness across overall: mean\n")
 print(apply(AR.overall.out$Ar,2,mean)[[1]])
 ```
 
-    ## [1] 3.237975
+    ## [1] 3.226165
 
 ``` r
 cat("Allelic richness across overall: SE\n")
@@ -303,7 +303,7 @@ cat("Allelic richness across overall: SE\n")
 print(apply(AR.overall.out$Ar,2,std_mean)[[1]])
 ```
 
-    ## [1] 0.2768401
+    ## [1] 0.2759146
 
 ``` r
 cat("\n")
@@ -322,7 +322,7 @@ print(Ho.out)
 ```
 
     ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
-    ##            0.4285714            0.1785714            0.3583357
+    ##            0.4285714            0.1785714            0.3524571
 
 ``` r
 cat("Observed heterozygosity across overall\n")
@@ -334,7 +334,7 @@ cat("Observed heterozygosity across overall\n")
 print(Ho(nameko.SSR.MLG.overall.genind)[[1]])
 ```
 
-    ## [1] 0.34345
+    ## [1] 0.3387929
 
 ``` r
 cat("\n")
@@ -353,7 +353,7 @@ print(Hs.out)
 ```
 
     ##      Cultivar.others Cultivar.sawdust.JPN                 Wild 
-    ##            0.4714286            0.1506696            0.5611409
+    ##            0.4714286            0.1506696            0.5580393
 
 ``` r
 cat("Expected heterozygosity across overall\n")
@@ -365,7 +365,7 @@ cat("Expected heterozygosity across overall\n")
 print(Hs(nameko.SSR.MLG.overall.genind)[[1]])
 ```
 
-    ## [1] 0.5366123
+    ## [1] 0.5344295
 
 ``` r
 cat("\n")

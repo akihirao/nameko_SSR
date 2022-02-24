@@ -91,32 +91,33 @@ print(no.mlg.poppr)
 poppr(nameko.SSR.subpop.genclone)
 ```
 
-    ##                            Pop   N MLG  eMLG    SE     H     G lambda   E.5
-    ## 1                     Hokkaido   3   3  3.00 0.000 1.099  3.00  0.667 1.000
-    ## 2                       Aomori   7   7  7.00 0.000 1.946  7.00  0.857 1.000
-    ## 3                        Iwate   2   2  2.00 0.000 0.693  2.00  0.500 1.000
-    ## 4                        Akita   2   2  2.00 0.000 0.693  2.00  0.500 1.000
-    ## 5                       Miyagi   5   3  3.00 0.000 0.950  2.27  0.560 0.802
-    ## 6                     Yamagata  14  14 10.00 0.000 2.639 14.00  0.929 1.000
-    ## 7                      Niigata   5   5  5.00 0.000 1.609  5.00  0.800 1.000
-    ## 8                    Fukushima  13  11  8.69 0.657 2.311  8.89  0.888 0.869
-    ## 9                       Toyama   1   1  1.00 0.000 0.000  1.00  0.000   NaN
-    ## 10                       Fukui   5   2  2.00 0.000 0.500  1.47  0.320 0.725
-    ## 11                      Nagano   9   7  7.00 0.000 1.889  6.23  0.840 0.932
-    ## 12                     Tottori   2   2  2.00 0.000 0.693  2.00  0.500 1.000
-    ## 13                       Kochi   5   2  2.00 0.000 0.500  1.47  0.320 0.725
-    ## 14        Cultivar.sawdust.JPN  39   8  4.79 0.991 1.678  4.21  0.763 0.738
-    ## 15            Cultivar.log.JPN   8   3  3.00 0.000 0.736  1.68  0.406 0.630
-    ## 16 Cultivar.sawdust.x.wild.JPN   1   1  1.00 0.000 0.000  1.00  0.000   NaN
-    ## 17                Cultivar.CHN   2   2  2.00 0.000 0.693  2.00  0.500 1.000
-    ## 18                       Total 123  74  8.97 0.965 3.901 28.17  0.965 0.561
+    ##                            Pop   N MLG  eMLG       SE     H     G lambda   E.5
+    ## 1                     Hokkaido   3   3  3.00 0.00e+00 1.099  3.00  0.667 1.000
+    ## 2                       Aomori   7   7  7.00 0.00e+00 1.946  7.00  0.857 1.000
+    ## 3                        Iwate   2   2  2.00 0.00e+00 0.693  2.00  0.500 1.000
+    ## 4                        Akita   2   2  2.00 0.00e+00 0.693  2.00  0.500 1.000
+    ## 5                       Miyagi   4   2  2.00 0.00e+00 0.562  1.60  0.375 0.795
+    ## 6                     Yamagata  15  15 10.00 2.77e-07 2.708 15.00  0.933 1.000
+    ## 7                      Niigata   5   5  5.00 0.00e+00 1.609  5.00  0.800 1.000
+    ## 8                    Fukushima  13  11  8.69 6.57e-01 2.311  8.89  0.888 0.869
+    ## 9                       Toyama   1   1  1.00 0.00e+00 0.000  1.00  0.000   NaN
+    ## 10                       Fukui   5   2  2.00 0.00e+00 0.500  1.47  0.320 0.725
+    ## 11                      Nagano   9   7  7.00 0.00e+00 1.889  6.23  0.840 0.932
+    ## 12                     Tottori   2   2  2.00 0.00e+00 0.693  2.00  0.500 1.000
+    ## 13                       Kochi   5   2  2.00 0.00e+00 0.500  1.47  0.320 0.725
+    ## 14        Cultivar.sawdust.JPN  39   8  4.79 9.91e-01 1.678  4.21  0.763 0.738
+    ## 15            Cultivar.log.JPN   7   3  3.00 0.00e+00 0.796  1.81  0.449 0.669
+    ## 16 Cultivar.sawdust.x.wild.JPN   1   1  1.00 0.00e+00 0.000  1.00  0.000   NaN
+    ## 17        Cultivar.sawdust.CHN   2   2  2.00 0.00e+00 0.693  2.00  0.500 1.000
+    ## 18            Cultivar.log.CHN   1   1  1.00 0.00e+00 0.000  1.00  0.000   NaN
+    ## 19                       Total 123  74  8.97 9.65e-01 3.901 28.17  0.965 0.561
     ##     Hexp      Ia    rbarD                       File
     ## 1  0.476 -0.4615 -0.05556 nameko.SSR.subpop.genclone
     ## 2  0.547 -0.0626 -0.00499 nameko.SSR.subpop.genclone
     ## 3  0.238      NA       NA nameko.SSR.subpop.genclone
     ## 4  0.488      NA       NA nameko.SSR.subpop.genclone
-    ## 5  0.368  6.2055  0.77034 nameko.SSR.subpop.genclone
-    ## 6  0.553 -0.1906 -0.01500 nameko.SSR.subpop.genclone
+    ## 5  0.283  6.1429  1.00000 nameko.SSR.subpop.genclone
+    ## 6  0.556 -0.2158 -0.01694 nameko.SSR.subpop.genclone
     ## 7  0.568  0.2434  0.02186 nameko.SSR.subpop.genclone
     ## 8  0.557  1.3561  0.10713 nameko.SSR.subpop.genclone
     ## 9  0.500      NA       NA nameko.SSR.subpop.genclone
@@ -125,7 +126,8 @@ poppr(nameko.SSR.subpop.genclone)
     ## 12 0.429      NA       NA nameko.SSR.subpop.genclone
     ## 13 0.292  6.3636  1.00000 nameko.SSR.subpop.genclone
     ## 14 0.128  0.6951  0.17881 nameko.SSR.subpop.genclone
-    ## 15 0.336  8.7753  0.84685 nameko.SSR.subpop.genclone
+    ## 15 0.360  8.6913  0.83669 nameko.SSR.subpop.genclone
     ## 16 0.429      NA       NA nameko.SSR.subpop.genclone
     ## 17 0.298      NA       NA nameko.SSR.subpop.genclone
-    ## 18 0.473  1.7411  0.13540 nameko.SSR.subpop.genclone
+    ## 18 0.286      NA       NA nameko.SSR.subpop.genclone
+    ## 19 0.473  1.7411  0.13540 nameko.SSR.subpop.genclone
