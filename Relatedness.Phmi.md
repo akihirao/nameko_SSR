@@ -93,7 +93,7 @@ related.run.output <- coancestry(nameko.Genotype$gdata, dyadml=1, trioml=1, lync
 ```
 
     ##    user  system elapsed 
-    ##  32.806   0.079  33.191 
+    ##  33.065   0.142  33.421 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -104,15 +104,15 @@ compareestimators(nameko.Genotype, 100)
 ```
 
     ##    user  system elapsed 
-    ##  27.239   1.449  30.037 
+    ##  27.951   1.469  30.201 
     ## 
     ## Reading output files into data.frames... Done!
     ## 
     ## Correlation Coefficients Between Observed & Expected Values:
-    ## wang     0.760138
-    ## lynchli      0.749709
-    ## lynchrd      0.765249
-    ## quellergt    0.755195
+    ## wang     0.739296
+    ## lynchli      0.741973
+    ## lynchrd      0.714225
+    ## quellergt    0.758715
 
 ![](Relatedness.Phmi_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
@@ -124,7 +124,7 @@ output <- coancestry(sim, quellergt=1)
 ```
 
     ##    user  system elapsed 
-    ##  29.294   2.063  34.605 
+    ##  29.187   1.743  32.896 
     ## 
     ## Reading output files into data.frames... Done!
 
@@ -244,7 +244,7 @@ print(relatedness.out.N127.N2$relatedness)
     ## [1] 0.1232
 
 ``` r
-p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")
+p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")　+ theme(axis.title.y = element_text(size=15)) + theme(axis.text.x = element_text(size=14),axis.text.y = element_text(size=14))
 
 p.boxplot
 ```
@@ -283,7 +283,7 @@ cat("P value: wild vs cultivar.others\n")
 print(format(wild.vs.cultivar.others.permu.out[[2]]),digits=3)
 ```
 
-    ## [1] "0.22"
+    ## [1] "0.216"
 
 ``` r
 cat("P value: wild vs cultivar.sawdust\n")

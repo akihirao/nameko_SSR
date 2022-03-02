@@ -166,7 +166,7 @@ relatedness.out.N127.N2 <- subset(relatedness.out,ind1.id %in% "Tohoku-N127" & i
 cat("relatedness between N127 and Fukushima-N2\n")
 print(relatedness.out.N127.N2$relatedness)
 
-p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")
+p.boxplot <- ggplot(relatedness.out.within, aes(x=Within,y=relatedness)) + geom_boxplot() + xlab("") + ylab("Relatedness")　+ theme(axis.title.y = element_text(size=15)) + theme(axis.text.x = element_text(size=14),axis.text.y = element_text(size=14))
 
 p.boxplot
 ```
