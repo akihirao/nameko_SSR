@@ -7,3 +7,6 @@
 * [Genetic diversity assessment](GeneticDiversity.md)
 * [Principle component analysis (PCA) and NJ tree](PCA.NJ.Phmi.md)
 * [Estimates of pairwise relatedness](Relatedness.Phmi.md)
+
+## Reference
+Hirao AS, Kumata A, Takagi T, Sasaki Y, Shigihara T, Kimura E, and S. Kaneko (accepted) Japanese “nameko” mushrooms (<i>Pholiota microspora</i>) produced via sawdust-based cultivation exhibit severe genetic bottleneck associated with a single founder. Mycoscience.
