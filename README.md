@@ -9,4 +9,4 @@
 * [Estimates of pairwise relatedness](Relatedness.Phmi.md)
 
 ## Reference
-Hirao AS, Kumata A, Takagi T, Sasaki Y, Shigihara T, Kimura E, and S. Kaneko (accepted) Japanese “nameko” mushrooms (<i>Pholiota microspora</i>) produced via sawdust-based cultivation exhibit severe genetic bottleneck associated with a single founder. Mycoscience, 63(3). https://doi.org/10.47371/mycosci.2022.03.002
+Hirao AS, Kumata A, Takagi T, Sasaki Y, Shigihara T, Kimura E, and S. Kaneko (accepted) Japanese “nameko” mushrooms (<i>Pholiota microspora</i>) produced via sawdust-based cultivation exhibit severe genetic bottleneck associated with a single founder. Mycoscience, 63(3): 79–87. https://doi.org/10.47371/mycosci.2022.03.002
